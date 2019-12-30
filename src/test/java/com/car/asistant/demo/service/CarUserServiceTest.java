@@ -1,4 +1,4 @@
-package com.car.asistant.demo;
+package com.car.asistant.demo.service;
 
 import com.car.asistant.demo.dto.CarUserDto;
 import com.car.asistant.demo.dto.UserDto;
