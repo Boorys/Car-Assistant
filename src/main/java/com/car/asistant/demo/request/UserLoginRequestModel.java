@@ -1,4 +1,4 @@
-package com.carAssistant.CarAssistant.request;
+package com.car.asistant.demo.request;
 
 public class UserLoginRequestModel {
 
