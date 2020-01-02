@@ -1,6 +1,5 @@
 package com.car.asistant.demo.security;
 
-
 import com.car.asistant.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -41,6 +40,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter())
+                .addFilter(new JwtFilter(authenticationManager(), userDetailsService))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
