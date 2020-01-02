@@ -2,9 +2,8 @@ package com.car.asistant.demo.service;
 
 
 import com.car.asistant.demo.entity.CarUserToInformationEntity;
-import javax.mail.MessagingException;
 import org.springframework.stereotype.Service;
-
+import javax.mail.MessagingException;
 
 @Service
 public interface SendMessageService {

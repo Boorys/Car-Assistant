@@ -1,10 +1,10 @@
 package com.car.asistant.demo.service.impl;
 
-import com.carAssistant.CarAssistant.Service.CreateMesageService;
-import com.carAssistant.CarAssistant.Service.SendMessageService;
-import com.carAssistant.CarAssistant.dto.CarUserToInformationDto;
-import com.carAssistant.CarAssistant.entity.CarUserToInformationEntity;
-import com.carAssistant.CarAssistant.mapper.CarUserToInformationMapper;
+import com.car.asistant.demo.dto.CarUserToInformationDto;
+import com.car.asistant.demo.entity.CarUserToInformationEntity;
+import com.car.asistant.demo.mapper.CarUserToInformationMapper;
+import com.car.asistant.demo.service.CreateMesageService;
+import com.car.asistant.demo.service.SendMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

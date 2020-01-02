@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
 
-@Component
+
 @Mapper(componentModel = "spring")
 public interface CarUserMapper {
 

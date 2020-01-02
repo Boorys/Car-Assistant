@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CarUserRepository extends PagingAndSortingRepository<CarUserEntity, String> {
 
-
-
     CarUserEntity findByCarUserId(String carUserId);
 
 

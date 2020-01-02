@@ -2,12 +2,15 @@ package com.car.asistant.demo.service.impl;
 
 import com.car.asistant.demo.dto.CarUserToInformationDto;
 import com.car.asistant.demo.service.CreateMesageService;
+
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class CreateMesageImpl implements CreateMesageService {
-    @Override
+
+
+   @Override
     public String createInformationMessage(CarUserToInformationDto carUserToInformationDto) {
 
         String message;
@@ -17,16 +20,17 @@ public class CreateMesageImpl implements CreateMesageService {
         if (carUserToInformationDto.getOil() == 1) {
             message = message + "wymiany oleju ";
         }
-        if (carUserToInformationDto.getTimingGear() == 1) {
+        if (carUserToInformationDto.getTimingGear() == 1)
+        {
             message = message + "przeglądu skrzyni biegów ";
         }
         if (carUserToInformationDto.getBreakPads() == 1) {
             message = message + " wymiany klocków hamulcowych";
         }
 
-        message = message + "<br><br><br> <h3>Pozdrawia zespół Car Assistant<h3>";
+        message = message+"<br><br><br> <h3>Pozdrawia zespół Car Assistant<h3>";
 
-        return message;
+        return   message ;
 
     }
 

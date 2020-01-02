@@ -1,6 +1,7 @@
 package com.car.asistant.demo;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -13,11 +14,10 @@ public void setApplicationContext(ApplicationContext context) throws BeansExcept
 	CONTEXT = context;
 	
 }
-	
+
 public static Object getBean(String beanName)
 {
 	return CONTEXT.getBean(beanName);
 }
 
-	
 }
