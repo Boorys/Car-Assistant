@@ -34,7 +34,6 @@ public class CarModelController {
     public CarModelRest createCarModel(@RequestBody CarModelRequestModel carModelRequestModel)
     {
         CarModelRest carModelRest = new CarModelRest();
-        ModelMapper modelMapper = new ModelMapper();
         CarModelDto carModelDto = new CarModelDto();
         carModelDto = carModelMapper.carModelRequestModelToCarModelDto(carModelRequestModel);
         CarModelDto carModelDtoCreated = new CarModelDto();

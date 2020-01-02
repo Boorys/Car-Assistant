@@ -19,11 +19,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-
     UserService userService;
-
     CarUserService carUserService;
-
     CarUserMapper carUserMapper;
 
     @Autowired
@@ -42,16 +39,13 @@ public class UserController {
         UserDto createdUserDto = new UserDto();
         userDto = modelMapper.map(userDetails, UserDto.class);
         createdUserDto = userService.createUser(userDto);
-
         userRest = modelMapper.map(createdUserDto, UserRest.class);
-
 
         return userRest;
     }
 
 
-    @PostMapping(path = "/{addCar}", consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(path = "/{addCar}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public UserRest addCarUser(@RequestBody CarUserRequestModel carUserRequestModel) {
 
         ModelMapper modelMapper = new ModelMapper();
@@ -65,12 +59,11 @@ public class UserController {
         return userRest;
     }
 
-    @GetMapping(path = "/showUser/{id}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = "/showUser/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public UserRest getUser(@PathVariable String id) {
         UserRest userRest = new UserRest();
         UserDto userDto = userService.getUserByUserId(id);
         ModelMapper modelMapper = new ModelMapper();
-
         userRest = modelMapper.map(userDto, UserRest.class);
 
         return userRest;
