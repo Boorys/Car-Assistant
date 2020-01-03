@@ -25,6 +25,8 @@ git clone https://github.com/Boorys/Car-Assistant.git
 
 cd Car-Assistant
 
+complete the application.properties file
+
 mvn spring-boot:run
 
 
