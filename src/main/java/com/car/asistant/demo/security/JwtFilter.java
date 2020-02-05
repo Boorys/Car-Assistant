@@ -2,7 +2,7 @@ package com.car.asistant.demo.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.car.asistant.demo.dto.UserDto;
+import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,7 +53,7 @@ public class JwtFilter extends BasicAuthenticationFilter {
                     .getSubject();
             if (email != null) {
 
-                UserDto userDto = userDetailsService.getUser(email);
+                UserGetDto userDto = userDetailsService.getUser(email);
               List<GrantedAuthority> role = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_"+userDto.getRole());
 
                 return new UsernamePasswordAuthenticationToken(userDto.getEmail(), null, role);

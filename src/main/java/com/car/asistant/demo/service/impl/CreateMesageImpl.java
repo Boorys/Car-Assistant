@@ -1,6 +1,7 @@
 package com.car.asistant.demo.service.impl;
 
-import com.car.asistant.demo.dto.CarUserToInformationDto;
+
+import com.car.asistant.demo.response.CarUserToInformationDto;
 import com.car.asistant.demo.service.CreateMesageService;
 
 import org.springframework.stereotype.Service;

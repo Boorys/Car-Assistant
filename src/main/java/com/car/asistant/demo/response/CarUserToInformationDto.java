@@ -1,4 +1,4 @@
-package com.car.asistant.demo.dto;
+package com.car.asistant.demo.response;
 
 public class CarUserToInformationDto {
 

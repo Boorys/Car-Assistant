@@ -1,12 +1,13 @@
 package com.car.asistant.demo.controller;
 
-import com.car.asistant.demo.dto.CarModelDto;
+
 import com.car.asistant.demo.mapper.CarModelMapper;
-import com.car.asistant.demo.request.CarModelRequestModel;
-import com.car.asistant.demo.response.CarModelRest;
+import com.car.asistant.demo.request.CarModelPostDto;
+import com.car.asistant.demo.response.CarModelFullGetDto;
+import com.car.asistant.demo.response.CarModelGetDto;
 import com.car.asistant.demo.service.CarModelService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,8 @@ public class CarModelController {
 
     CarModelMapper carModelMapper;
 
-    public CarModelController(){}
+    public CarModelController() {
+    }
 
     @Autowired
     public CarModelController(CarModelService carModelService, CarModelMapper carModelMapper) {
@@ -29,31 +31,31 @@ public class CarModelController {
         this.carModelMapper = carModelMapper;
     }
 
-    @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = {
-           MediaType.APPLICATION_JSON_VALUE})
-    public CarModelRest createCarModel(@RequestBody CarModelRequestModel carModelRequestModel)
-    {
-        CarModelRest carModelRest = new CarModelRest();
-        CarModelDto carModelDto = new CarModelDto();
-        carModelDto = carModelMapper.carModelRequestModelToCarModelDto(carModelRequestModel);
-        CarModelDto carModelDtoCreated = new CarModelDto();
-        carModelDtoCreated = carModelService.createCarModel(carModelDto);
-        carModelRest = carModelMapper.carModelDtoToCarModelRest(carModelDtoCreated);
+    @PostMapping(path="/addCarModel",consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car model")
+    public void createCarModel(@RequestBody CarModelPostDto carModelPostDto) {
 
-        return carModelRest;
+        carModelService.createCarModel(carModelPostDto);
+
     }
 
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE})
-    public List<CarModelRest> getUser() {
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<CarModelFullGetDto> getCarModel() {
 
-        List<CarModelRest> carModelRestList = new ArrayList<>();
-        List<CarModelDto> carModelDtoList = new ArrayList<>();
-        carModelDtoList.addAll(carModelService.getAllCarModel(0, 10));
-        for (CarModelDto carModelDto : carModelDtoList) {
-            carModelRestList.add(carModelMapper.carModelDtoToCarModelRest(carModelDto));
-        }
+        List<CarModelFullGetDto> carModelDtos = new ArrayList<>();
+        carModelDtos = carModelService.getAllCarModel();
 
-        return carModelRestList;
+        return carModelDtos;
     }
+
+    @GetMapping(path = "/get-model/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<CarModelGetDto> getCarModelForUser(@PathVariable String userId) {
+
+        List<CarModelGetDto> carModelGetDtoList = new ArrayList<>();
+        carModelGetDtoList = carModelService.getCarModel(userId);
+
+        return carModelGetDtoList;
+    }
+
 
 }

@@ -2,16 +2,19 @@ package com.car.asistant.demo.mapper;
 
 
 
-import com.car.asistant.demo.dto.UserDto;
 import com.car.asistant.demo.entity.UserEntity;
+import com.car.asistant.demo.request.UserPostDto;
+import com.car.asistant.demo.response.UserGetDto;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+
 
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDto userEntityToUserDto(UserEntity userEntity);
-    UserEntity userDtoToUserEntity(UserDto userDto);
+    UserGetDto userEntityToUserDto(UserEntity userEntity);
 
+    UserEntity userGetDtoToUserEntity(UserGetDto userGetDto);
+
+    UserEntity userPostDtoToUserEntity(UserPostDto userPostDto);
 }

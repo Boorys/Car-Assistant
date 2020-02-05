@@ -1,22 +1,29 @@
 package com.car.asistant.demo.mapper;
 
-import com.car.asistant.demo.dto.CarModelDto;
+
 import com.car.asistant.demo.entity.CarModelEntity;
-import com.car.asistant.demo.request.CarModelRequestModel;
-import com.car.asistant.demo.response.CarModelRest;
+import com.car.asistant.demo.request.CarModelPostDto;
+import com.car.asistant.demo.response.CarModelFullGetDto;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 
 @Mapper(componentModel = "spring")
 public interface CarModelMapper {
 
-    CarModelRest carModelDtoToCarModelRest(CarModelDto carModelDto);
 
-    CarModelDto carModelEntityToCarModelDto(CarModelEntity carModelEntity);
 
-    CarModelDto carModelRequestModelToCarModelDto(CarModelRequestModel carModelRequestModel);
+    CarModelFullGetDto carModelEntityToCarModelDto(CarModelEntity carModelEntity);
 
-    CarModelEntity carModelDtoToCarModelEntity(CarModelDto carModelDto);
+    CarModelEntity carModelFullGetDtoToCarModelEntity(CarModelFullGetDto carModelDto);
+
+    @Mappings({
+            @Mapping(target = "carBrand", source = "carBrand"),
+            @Mapping(target = "model", source = "model"),
+            @Mapping(target = "brakePads", source = "brakePads")
+    })
+    CarModelEntity carModelPostDtoToCarModelEntity(CarModelPostDto carModelPostDto);
+
 
 }

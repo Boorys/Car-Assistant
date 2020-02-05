@@ -1,6 +1,6 @@
 package com.car.asistant.demo.request;
 
-public class UserLoginRequestModel {
+public class UserLoginPostDto {
 
 	private String email;
 	private String password;

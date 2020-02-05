@@ -1,14 +1,23 @@
 package com.car.asistant.demo.request;
 
 
-public class CarUserRequestModel {
+public class CarUserPostDto {
 
-    private String userId;
+
     private int carMilages;
     private int numberOfKilomentersPerMonth;
     private int kilometersSinceTheLastChangeBraekPads;
     private int kilometersSinceTheLastChangeOil;
     private int kilometersSinceTheLastChangeTimingGear;
+    private String carModelId;
+
+    public String getCarModelId() {
+        return carModelId;
+    }
+
+    public void setCarModelId(String carModelId) {
+        this.carModelId = carModelId;
+    }
 
     public int getKilometersSinceTheLastChangeBraekPads() {
         return kilometersSinceTheLastChangeBraekPads;
@@ -34,13 +43,6 @@ public class CarUserRequestModel {
         this.kilometersSinceTheLastChangeTimingGear = kilometersSinceTheLastChangeTimingGear;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public int getCarMilages() {
         return carMilages;

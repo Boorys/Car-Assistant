@@ -1,8 +1,8 @@
 package com.car.asistant.demo.service.impl;
 
-import com.car.asistant.demo.dto.CarUserToInformationDto;
 import com.car.asistant.demo.entity.CarUserToInformationEntity;
 import com.car.asistant.demo.mapper.CarUserToInformationMapper;
+import com.car.asistant.demo.response.CarUserToInformationDto;
 import com.car.asistant.demo.service.CreateMesageService;
 import com.car.asistant.demo.service.SendMessageService;
 import org.springframework.beans.factory.annotation.Autowired;

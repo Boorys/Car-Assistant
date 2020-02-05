@@ -1,22 +1,33 @@
-package com.car.asistant.demo.request;
+package com.car.asistant.demo.response;
 
-public class CarModelRequestModel {
+public class CarModelFullGetDto {
 
-    private String carUserId;
+
+    private long id;
+    private String carModelId;
     private int timingGear;
     private String carBrand;
     private String model;
     private int brakePads;
     private int oil;
 
-
-    public String getCarUserId() {
-        return carUserId;
+    public long getId() {
+        return id;
     }
 
-    public void setCarUserId(String carUserId) {
-        this.carUserId = carUserId;
+    public void setId(long id) {
+        this.id = id;
     }
+
+    public String getCarModelId() {
+        return carModelId;
+    }
+
+    public void setCarModelId(String carModelId) {
+        this.carModelId = carModelId;
+    }
+
+
 
     public int getTimingGear() {
         return timingGear;
@@ -57,4 +68,6 @@ public class CarModelRequestModel {
     public void setOil(int oil) {
         this.oil = oil;
     }
+
+
 }

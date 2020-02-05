@@ -1,11 +1,13 @@
 package com.car.asistant.demo.service.impl;
 
-import com.car.asistant.demo.dto.CarUserDto;
-import com.car.asistant.demo.dto.UserDto;
+
 import com.car.asistant.demo.entity.UserEntity;
 import com.car.asistant.demo.kit.Utils;
 import com.car.asistant.demo.mapper.UserMapper;
 import com.car.asistant.demo.repository.UserRepository;
+import com.car.asistant.demo.request.UserPostDto;
+import com.car.asistant.demo.response.CarUserDto;
+import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
 
+    private UserRepository userRepository;
+    private UserMapper userMapper;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private Utils utils;
 
-  private UserRepository userRepository;
-  private UserMapper userMapper;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
-  private Utils utils;
-
-  @Autowired
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, BCryptPasswordEncoder bCryptPasswordEncoder, Utils utils) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
@@ -38,49 +39,39 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-    public UserServiceImpl(){}
+    public UserServiceImpl() {
+    }
 
     @Override
-    public UserDto getUser(String email) {
+    public UserGetDto getUser(String email) {
 
         UserEntity userEntity = userRepository.findByEmail(email);
         if (userEntity == null) throw new UsernameNotFoundException(email);
 
-        UserDto returnValue = new UserDto();
+        UserGetDto returnValue = new UserGetDto();
         BeanUtils.copyProperties(userEntity, returnValue);
 
         return returnValue;
     }
 
+
     @Override
-    public UserDto createUser(UserDto userDto) {
+    public UserEntity createUser(UserPostDto userPostDto) {
+
 
         UserEntity userEntity = new UserEntity();
-
-        userEntity = userMapper.userDtoToUserEntity(userDto);
-        UserDto savedUserDto = new UserDto();
-        UserEntity savedUserEntity = new UserEntity();
-      String Password = bCryptPasswordEncoder.encode(userDto.getPassword());
-        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        String publicUserId = utils.generateUserId(30);
+        userEntity = userMapper.userPostDtoToUserEntity(userPostDto);
+        String password = bCryptPasswordEncoder.encode(userPostDto.getPassword());
+        userEntity.setEncryptedPassword(password);
+        String publicUserId = utils.generateUserId(10);
         userEntity.setUserId(publicUserId);
+        userEntity.setRole("USER");
+        userRepository.save(userEntity);
 
-        savedUserEntity = userRepository.save(userEntity);
-        savedUserDto = userMapper.userEntityToUserDto(savedUserEntity);
-        return savedUserDto;
+        return userEntity;
     }
 
-    @Override
-    public UserDto getUserByUserId(String userId) {
-        UserDto userDto = new UserDto();
-        UserEntity userEntity = userRepository.findByUserId(userId);
-        if(userEntity == null) throw new UsernameNotFoundException(userId);
-        List<CarUserDto> list = new ArrayList<>();
-        userDto = userMapper.userEntityToUserDto(userEntity);
 
-        return userDto;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

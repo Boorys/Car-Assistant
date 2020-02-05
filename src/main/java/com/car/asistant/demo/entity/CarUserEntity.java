@@ -21,7 +21,6 @@ public class CarUserEntity {
     @Column(nullable = false, length = 45)
     private int kilometersSinceTheLastChangeTimingGear;
 
-
     @ManyToOne
     @JoinColumn(name = "carModel")
     private CarModelEntity carModel;

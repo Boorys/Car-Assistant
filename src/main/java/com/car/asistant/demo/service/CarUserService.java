@@ -1,12 +1,14 @@
 package com.car.asistant.demo.service;
 
-import com.car.asistant.demo.dto.CarUserDto;
-import com.car.asistant.demo.dto.UserDto;
+
+import com.car.asistant.demo.entity.UserEntity;
+import com.car.asistant.demo.request.CarUserPostDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface CarUserService {
 
-    UserDto createCarUser(CarUserDto carUserDto);
+
+    UserEntity createCarUser(CarUserPostDto carUserRequestModel, String userId);
 
 }

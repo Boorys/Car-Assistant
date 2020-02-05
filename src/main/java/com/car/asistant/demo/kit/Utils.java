@@ -1,7 +1,6 @@
 package com.car.asistant.demo.kit;
 
 import org.springframework.stereotype.Component;
-
 import java.security.SecureRandom;
 import java.util.Random;
 

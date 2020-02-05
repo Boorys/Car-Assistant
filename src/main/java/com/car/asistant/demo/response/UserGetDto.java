@@ -1,8 +1,8 @@
-package com.car.asistant.demo.dto;
+package com.car.asistant.demo.response;
 
 import java.util.List;
 
-public class UserDto {
+public class UserGetDto {
 
 
     private long id;
@@ -23,7 +23,7 @@ private String role;
         this.role = role;
     }
 
-    public UserDto(){}
+
 
     public long getId() {
         return id;

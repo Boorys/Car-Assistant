@@ -1,7 +1,7 @@
 package com.car.asistant.demo.service.impl;
 
-import com.car.asistant.demo.dto.CarUserDto;
-import com.car.asistant.demo.dto.UserDto;
+
+import com.car.asistant.demo.entity.CarModelEntity;
 import com.car.asistant.demo.entity.CarUserEntity;
 import com.car.asistant.demo.entity.UserEntity;
 import com.car.asistant.demo.kit.Utils;
@@ -10,7 +10,9 @@ import com.car.asistant.demo.mapper.UserMapper;
 import com.car.asistant.demo.repository.CarModelRepository;
 import com.car.asistant.demo.repository.CarUserRepository;
 import com.car.asistant.demo.repository.UserRepository;
+import com.car.asistant.demo.request.CarUserPostDto;
 import com.car.asistant.demo.service.CarUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,28 +44,29 @@ public class CarUserServiceImpl implements CarUserService {
     }
 
     @Override
-    public UserDto createCarUser(CarUserDto carUserDto) {
+    public UserEntity createCarUser(CarUserPostDto carUserPostDto, String userId) {
 
         UserEntity userEntity = new UserEntity();
-        userEntity = userRepository.findByUserId(carUserDto.getUserId());
-
-        String publicCarUserId = utils.generateUserId(30);
-        carUserDto.setCarUserId(publicCarUserId);
+        CarModelEntity carModelEntity = new CarModelEntity();
         CarUserEntity carUserEntity = new CarUserEntity();
+
+        carModelEntity = carModelRepository.findByCarModelId(carUserPostDto.getCarModelId());
+
+        carUserEntity = carUserMapper.carUserPostDtoToCarUserEntity(carUserPostDto);
+
+        userEntity = userRepository.findByUserId(userId);
+        carUserEntity.setCarUserId(utils.generateUserId(10));
+        carUserEntity.setCarModel(carModelEntity);
         List<CarUserEntity> list = new ArrayList<>();
-
-
-        carUserEntity = carUserMapper.carUserDtoToCarUserEntity(carUserDto);
         list.add(carUserEntity);
         userEntity.setCarsUser(list);
         carUserEntity.setUser(userEntity);
-        userEntity = userRepository.save(userEntity);
-        UserDto returnedUserDto = new UserDto();
-        returnedUserDto = userMapper.userEntityToUserDto(userEntity);
+        carUserRepository.save(carUserEntity);
+        userRepository.save(userEntity);
 
-
-        return returnedUserDto;
+        return userEntity;
     }
+
 
 
 }

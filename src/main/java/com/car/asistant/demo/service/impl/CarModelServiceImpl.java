@@ -1,22 +1,23 @@
 package com.car.asistant.demo.service.impl;
 
 
-import com.car.asistant.demo.dto.CarModelDto;
 import com.car.asistant.demo.entity.CarModelEntity;
-import com.car.asistant.demo.entity.CarUserEntity;
 import com.car.asistant.demo.kit.Utils;
 import com.car.asistant.demo.mapper.CarModelMapper;
 import com.car.asistant.demo.repository.CarModelRepository;
 import com.car.asistant.demo.repository.CarUserRepository;
+import com.car.asistant.demo.request.CarModelPostDto;
+import com.car.asistant.demo.response.CarModelFullGetDto;
+import com.car.asistant.demo.response.CarModelGetDto;
 import com.car.asistant.demo.service.CarModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarModelServiceImpl implements CarModelService {
@@ -35,44 +36,42 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     @Override
-    public CarModelDto createCarModel(CarModelDto carModelDto) {
+    public CarModelEntity createCarModel(CarModelPostDto carModelPostDto) {
 
-        CarUserEntity carUserEntity = new CarUserEntity();
-        carUserEntity = carUserRepository.findByCarUserId(carModelDto.getCarUserId());
-        List<CarUserEntity> carUserEntities = new ArrayList<>();
-        carUserEntities.add(carUserEntity);
-
-
-        String publicCarModelId = utils.generateUserId(30);
         CarModelEntity carModelEntity = new CarModelEntity();
-
-        carModelDto.setCarModelId(publicCarModelId);
-
-        carModelEntity = carModelMapper.carModelDtoToCarModelEntity(carModelDto);
-
-        carModelEntity.setCarsUser(carUserEntities);
+        carModelEntity = carModelMapper.carModelPostDtoToCarModelEntity(carModelPostDto);
+        String carModelId = utils.generateUserId(10);
+        carModelEntity.setCarModelId(carModelId);
         carModelRepository.save(carModelEntity);
-        carUserEntity.setCarModel(carModelEntity);
-        carUserRepository.save(carUserEntity);
 
 
-        return carModelDto;
+        return carModelEntity;
     }
 
     @Override
-    public List<CarModelDto> getAllCarModel(int page, int limit) {
+    public List<CarModelFullGetDto> getAllCarModel() {
 
-        List<CarModelDto> carModelDtoList = new ArrayList<>();
-        CarModelDto carModelDto = new CarModelDto();
-        Pageable pagableRequest = PageRequest.of(page, limit);
-        Page<CarModelEntity> carModelEntityPage = carModelRepository.findAll(pagableRequest);
-        List<CarModelEntity> carsModel = carModelEntityPage.getContent();
+        List<CarModelEntity> carModelEntities = new ArrayList<>();
+        List<CarModelFullGetDto> carModelDtos = new ArrayList<>();
+        CarModelFullGetDto carModelDto;
+        carModelEntities = carModelRepository.findAll();
 
-        for (CarModelEntity carModelEntity : carsModel) {
+        for (CarModelEntity carModelEntity : carModelEntities) {
             carModelDto = carModelMapper.carModelEntityToCarModelDto(carModelEntity);
-            carModelDtoList.add(carModelDto);
+            carModelDtos.add(carModelDto);
         }
 
-        return carModelDtoList;
+        return carModelDtos;
     }
+
+    @Override
+    public List<CarModelGetDto> getCarModel(String userId) {
+
+        List<Object[]> list = new ArrayList();
+        list = carModelRepository.findCarModelByUserId(userId);
+        List<CarModelGetDto> carModel = list.stream().map(x -> new CarModelGetDto(x[1].toString(), x[0].toString())).collect(Collectors.toList());
+
+        return carModel;
+    }
+
 }

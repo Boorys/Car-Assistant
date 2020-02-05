@@ -19,15 +19,16 @@ public class UserEntity {
     @Column(nullable = false, length = 45)
     private String lastName;
 
+
     @Column(nullable = false, length = 45)
     private String email;
 
     @Column(nullable = false, length = 45)
     private String password;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false)
     private String encryptedPassword;
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 10)
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
