@@ -4,11 +4,20 @@ public class CarModelGetDto {
 
     private String carModel;
     private String brand;
+    private String carUserId;
 
-
-    public CarModelGetDto(String carModel,String brand) {
+    public CarModelGetDto(String carModel, String brand, String carUserId) {
         this.carModel = carModel;
         this.brand = brand;
+        this.carUserId = carUserId;
+    }
+
+    public String getCarUserId() {
+        return carUserId;
+    }
+
+    public void setCarUserId(String carUserId) {
+        this.carUserId = carUserId;
     }
 
     public String getCarModel() {

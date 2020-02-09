@@ -69,7 +69,7 @@ public class CarModelServiceImpl implements CarModelService {
 
         List<Object[]> list = new ArrayList();
         list = carModelRepository.findCarModelByUserId(userId);
-        List<CarModelGetDto> carModel = list.stream().map(x -> new CarModelGetDto(x[1].toString(), x[0].toString())).collect(Collectors.toList());
+        List<CarModelGetDto> carModel = list.stream().map(x -> new CarModelGetDto(x[1].toString(), x[0].toString(), x[2].toString())).collect(Collectors.toList());
 
         return carModel;
     }

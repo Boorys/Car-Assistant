@@ -3,6 +3,7 @@ package com.car.asistant.demo.controller;
 import com.car.asistant.demo.mapper.CarUserMapper;
 import com.car.asistant.demo.request.CarUserPostDto;
 import com.car.asistant.demo.request.UserPostDto;
+import com.car.asistant.demo.response.UserSimpleGetDto;
 import com.car.asistant.demo.service.CarUserService;
 import com.car.asistant.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,12 @@ public class UserController {
         carUserService.createCarUser(carUserPostDto, userId);
     }
 
+    @GetMapping(path = "/getUser/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public UserSimpleGetDto getUserByUserId(@PathVariable String userId) {
+        UserSimpleGetDto userSimpleGetDto = userService.getUserByUserId(userId);
 
+        return userSimpleGetDto;
+    }
 
 
 }

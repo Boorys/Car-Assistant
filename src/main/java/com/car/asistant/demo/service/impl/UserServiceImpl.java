@@ -8,6 +8,7 @@ import com.car.asistant.demo.repository.UserRepository;
 import com.car.asistant.demo.request.UserPostDto;
 import com.car.asistant.demo.response.CarUserDto;
 import com.car.asistant.demo.response.UserGetDto;
+import com.car.asistant.demo.response.UserSimpleGetDto;
 import com.car.asistant.demo.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,15 @@ public class UserServiceImpl implements UserService {
         return userEntity;
     }
 
+    @Override
+    public UserSimpleGetDto getUserByUserId(String userId) {
+
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        UserSimpleGetDto userSimpleGetDto;
+        userSimpleGetDto = userMapper.userEntityToUserSimpleGetDto(userEntity);
+
+        return userSimpleGetDto;
+    }
 
 
     @Override

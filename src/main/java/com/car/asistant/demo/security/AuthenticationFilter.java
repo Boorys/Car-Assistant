@@ -7,12 +7,14 @@ import com.car.asistant.demo.request.UserLoginPostDto;
 import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -46,6 +48,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
+    @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car model")
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
         String userName = ((User) auth.getPrincipal()).getUsername();
