@@ -48,7 +48,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car model")
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
         String userName = ((User) auth.getPrincipal()).getUsername();

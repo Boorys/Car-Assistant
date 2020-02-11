@@ -20,7 +20,7 @@ public class UserEntity {
     private String lastName;
 
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 45,unique=true)
     private String email;
 
     @Column(nullable = false, length = 45)
@@ -28,6 +28,7 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String encryptedPassword;
+
     @Column(nullable = false, length = 10)
     private String role;
 

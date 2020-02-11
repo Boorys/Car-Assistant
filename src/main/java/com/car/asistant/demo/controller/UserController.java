@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -30,7 +33,7 @@ public class UserController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Add user")
-    public void createUser(@RequestBody UserPostDto userPostDto) {
+    public void createUser(@Valid @RequestBody UserPostDto userPostDto) throws Exception {
 
         userService.createUser(userPostDto);
     }
@@ -44,8 +47,18 @@ public class UserController {
     }
 
     @GetMapping(path = "/getUser/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Some parameters are invalid")
     public UserSimpleGetDto getUserByUserId(@PathVariable String userId) {
+
         UserSimpleGetDto userSimpleGetDto = userService.getUserByUserId(userId);
+        int w = 3;
+
+        try {
+            w = w / 0;
+        } catch (Exception exc) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Foo Not Found", exc);
+        }
 
         return userSimpleGetDto;
     }

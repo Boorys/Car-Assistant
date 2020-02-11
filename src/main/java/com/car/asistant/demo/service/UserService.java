@@ -11,7 +11,7 @@ public interface UserService extends UserDetailsService {
 
     UserGetDto getUser(String email);
 
-    UserEntity createUser(UserPostDto userPostDto);
+    UserEntity createUser(UserPostDto userPostDto) throws Exception;
 
     UserSimpleGetDto getUserByUserId(String userId);
 }

@@ -2,11 +2,11 @@ package com.car.asistant.demo.service.impl;
 
 
 import com.car.asistant.demo.entity.UserEntity;
+import com.car.asistant.demo.exception.UserExistException;
 import com.car.asistant.demo.kit.Utils;
 import com.car.asistant.demo.mapper.UserMapper;
 import com.car.asistant.demo.repository.UserRepository;
 import com.car.asistant.demo.request.UserPostDto;
-import com.car.asistant.demo.response.CarUserDto;
 import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.response.UserSimpleGetDto;
 import com.car.asistant.demo.service.UserService;
@@ -17,9 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 @Service
@@ -60,13 +59,20 @@ public class UserServiceImpl implements UserService {
     public UserEntity createUser(UserPostDto userPostDto) {
 
 
-        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity;
+
+        userEntity = userRepository.findByEmail(userPostDto.getEmail());
+        if (userEntity != null) {
+            throw new UserExistException(userPostDto.getEmail());
+        }
+        userEntity = new UserEntity();
         userEntity = userMapper.userPostDtoToUserEntity(userPostDto);
         String password = bCryptPasswordEncoder.encode(userPostDto.getPassword());
         userEntity.setEncryptedPassword(password);
         String publicUserId = utils.generateUserId(10);
         userEntity.setUserId(publicUserId);
         userEntity.setRole("USER");
+
         userRepository.save(userEntity);
 
         return userEntity;
