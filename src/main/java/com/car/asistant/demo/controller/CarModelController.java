@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CarModelController {
 
     @PostMapping(path="/addCarModel",consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car model")
-    public void createCarModel(@RequestBody CarModelPostDto carModelPostDto) {
+    public void createCarModel(@Valid @RequestBody CarModelPostDto carModelPostDto) {
 
         carModelService.createCarModel(carModelPostDto);
 

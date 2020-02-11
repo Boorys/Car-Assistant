@@ -51,14 +51,6 @@ public class UserController {
     public UserSimpleGetDto getUserByUserId(@PathVariable String userId) {
 
         UserSimpleGetDto userSimpleGetDto = userService.getUserByUserId(userId);
-        int w = 3;
-
-        try {
-            w = w / 0;
-        } catch (Exception exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Foo Not Found", exc);
-        }
 
         return userSimpleGetDto;
     }

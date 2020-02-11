@@ -2,6 +2,7 @@ package com.car.asistant.demo.service.impl;
 
 
 import com.car.asistant.demo.entity.CarModelEntity;
+import com.car.asistant.demo.exception.ModelExistException;
 import com.car.asistant.demo.kit.Utils;
 import com.car.asistant.demo.mapper.CarModelMapper;
 import com.car.asistant.demo.repository.CarModelRepository;
@@ -38,7 +39,12 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public CarModelEntity createCarModel(CarModelPostDto carModelPostDto) {
 
-        CarModelEntity carModelEntity = new CarModelEntity();
+        CarModelEntity carModelEntity;
+        carModelEntity = carModelRepository.findByModel(carModelPostDto.getModel());
+        if (carModelEntity != null) {
+            throw new ModelExistException(carModelPostDto.getModel());
+        }
+        carModelEntity = new CarModelEntity();
         carModelEntity = carModelMapper.carModelPostDtoToCarModelEntity(carModelPostDto);
         String carModelId = utils.generateUserId(10);
         carModelEntity.setCarModelId(carModelId);

@@ -22,4 +22,5 @@ public interface CarModelRepository extends PagingAndSortingRepository<CarModelE
     List<Object[]> findCarModelByUserId(String id);
 
 
+    CarModelEntity findByModel(String model);
 }
