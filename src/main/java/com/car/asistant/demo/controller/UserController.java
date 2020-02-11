@@ -41,7 +41,7 @@ public class UserController {
 
     @PostMapping(path = "/addCar/{userId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car")
-    public void addCarUser(@RequestBody CarUserPostDto carUserPostDto, @PathVariable String userId) {
+    public void addCarUser(@Valid @RequestBody CarUserPostDto carUserPostDto, @PathVariable String userId) {
 
         carUserService.createCarUser(carUserPostDto, userId);
     }

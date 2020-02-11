@@ -1,13 +1,19 @@
 package com.car.asistant.demo.request;
 
 
+import javax.validation.constraints.Min;
+
 public class CarUserPostDto {
 
-
+    @Min(value = 0, message = "Car milage must be positive")
     private int carMilages;
+    @Min(value = 0, message = "Number of kilometers per month  must be positive")
     private int numberOfKilomentersPerMonth;
+    @Min(value = 0, message = "Kilometers since the last change braek pads value must be positive")
     private int kilometersSinceTheLastChangeBraekPads;
+    @Min(value = 0, message = "Kilometers since the last change oil must be positive")
     private int kilometersSinceTheLastChangeOil;
+    @Min(value = 0, message = "Kilometers since the last change timing gear must be positive")
     private int kilometersSinceTheLastChangeTimingGear;
     private String carModelId;
 
