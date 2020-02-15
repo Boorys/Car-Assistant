@@ -49,7 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 
     public AuthenticationFilter getAuthenticationFilter() throws Exception {
-        final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager());
+        final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(),bCryptPasswordEncoder);
         filter.setFilterProcessesUrl("/users/login");
         return filter;
     }

@@ -114,7 +114,7 @@ userDto.setFirstName("Tom");
         String encrypted ="aaasasas";
         UserEntity userEntity = new UserEntity();
        userEntity.setEmail(email);
-        userEntity.setPassword(password);
+       // userEntity.setPassword(password);
         userEntity.setEncryptedPassword(encrypted);
         when(userRepository.findByEmail(email)).thenReturn(userEntity);
 

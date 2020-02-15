@@ -7,12 +7,14 @@ import com.car.asistant.demo.request.UserLoginPostDto;
 import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -26,9 +28,12 @@ import java.util.ArrayList;
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
+
+    public AuthenticationFilter(AuthenticationManager authenticationManager, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.authenticationManager = authenticationManager;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -40,7 +45,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                     .readValue(request.getInputStream(), UserLoginPostDto.class);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     creds.getEmail(),
-                    creds.getPassword(),
+                   creds.getPassword(),
                     new ArrayList<>()));
         } catch (IOException e) {
             throw new RuntimeException(e);

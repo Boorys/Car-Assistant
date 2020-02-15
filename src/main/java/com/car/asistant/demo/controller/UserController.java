@@ -47,7 +47,6 @@ public class UserController {
     }
 
     @GetMapping(path = "/getUser/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Some parameters are invalid")
     public UserSimpleGetDto getUserByUserId(@PathVariable String userId) {
 
         UserSimpleGetDto userSimpleGetDto = userService.getUserByUserId(userId);

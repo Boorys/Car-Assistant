@@ -26,14 +26,20 @@ public class InformationUserImpl implements InformationUserService {
         this.carUserToInformationRepository = carUserToInformationRepository;
     }
 
-    @Scheduled(cron = "1 1 1 1 * ?")//seconds, minutes, hours, days of the month, months and days of the week
+
+
+
+
+    //@Scheduled(cron = "1 1 1 1 * ?")//seconds, minutes, hours, days of the month, months and days of the week
+
+    @Scheduled(fixedRate=1000)
    @Override
     public void sendInformationToUser() throws MessagingException {
 
         List<CarUserToInformationEntity> carUserToInformationEntityList = carUserToInformationRepository.findAll();
 
         for (CarUserToInformationEntity user : carUserToInformationEntityList) {
-
+            System.out.println("wysyłam");
             sendMessageService.sendEmail(user);
 
         }

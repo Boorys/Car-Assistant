@@ -23,8 +23,8 @@ public class UserEntity {
     @Column(nullable = false, length = 45,unique=true)
     private String email;
 
-    @Column(nullable = false, length = 45)
-    private String password;
+  /*  @Column(nullable = false, length = 45)
+    private String password;*/
 
     @Column(nullable = false)
     private String encryptedPassword;
@@ -83,14 +83,14 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getPassword() {
+ /*   public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
-
+*/
     public String getEncryptedPassword() {
         return encryptedPassword;
     }
