@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car-model")
+@RequestMapping("/car/model")
 public class CarModelController {
 
     CarModelService carModelService;
@@ -32,7 +32,7 @@ public class CarModelController {
         this.carModelMapper = carModelMapper;
     }
 
-    @PostMapping(path="/addCarModel",consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(path="/add/car/model",consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Add car model")
     public void createCarModel(@Valid @RequestBody CarModelPostDto carModelPostDto) {
 
@@ -49,7 +49,7 @@ public class CarModelController {
         return carModelDtos;
     }
 
-    @GetMapping(path = "/get-model/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = "/get/model/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<CarModelGetDto> getCarModelForUser(@PathVariable String userId) {
 
         List<CarModelGetDto> carModelGetDtoList = new ArrayList<>();
