@@ -32,7 +32,7 @@ public class UserServiceTest {
         userMapper = mock(UserMapper.class);
         bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
         utils = mock(Utils.class);
-        userService = spy(new UserServiceImpl(userRepository, userMapper, bCryptPasswordEncoder, utils));
+  //      userService = spy(new UserServiceImpl(userRepository, userMapper, bCryptPasswordEncoder, utils));
     }
 
     @Test

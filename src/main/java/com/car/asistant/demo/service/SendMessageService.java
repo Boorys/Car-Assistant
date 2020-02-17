@@ -8,7 +8,8 @@ import javax.mail.MessagingException;
 @Service
 public interface SendMessageService {
 
-void sendEmail(CarUserToInformationEntity carUserToInformationEntities) throws MessagingException;
+void sendEmailAboutRepair(CarUserToInformationEntity carUserToInformationEntities) throws MessagingException;
+void sendEmail(String message,String email) throws MessagingException;
 
 
 }

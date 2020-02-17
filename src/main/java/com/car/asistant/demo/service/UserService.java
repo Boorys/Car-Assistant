@@ -6,6 +6,8 @@ import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.response.UserSimpleGetDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.text.ParseException;
+
 
 public interface UserService extends UserDetailsService {
 
@@ -14,4 +16,7 @@ public interface UserService extends UserDetailsService {
     UserEntity createUser(UserPostDto userPostDto) throws Exception;
 
     UserSimpleGetDto getUserByUserId(String userId);
+
+    void verificationUser(String token) throws Exception;
+
 }

@@ -19,18 +19,17 @@ public class UserEntity {
     @Column(nullable = false, length = 45)
     private String lastName;
 
-
     @Column(nullable = false, length = 45,unique=true)
     private String email;
-
-  /*  @Column(nullable = false, length = 45)
-    private String password;*/
 
     @Column(nullable = false)
     private String encryptedPassword;
 
     @Column(nullable = false, length = 10)
     private String role;
+
+    @Column()
+    private boolean enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CarUserEntity> carsUser;
@@ -83,18 +82,15 @@ public class UserEntity {
         this.email = email;
     }
 
- /*   public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-*/
     public String getEncryptedPassword() {
         return encryptedPassword;
     }
-
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
     }

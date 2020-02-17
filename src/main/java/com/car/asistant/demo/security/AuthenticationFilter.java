@@ -3,6 +3,7 @@ package com.car.asistant.demo.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.car.asistant.demo.SpringApplicationContext;
+import com.car.asistant.demo.exception.UserNotEnabledException;
 import com.car.asistant.demo.request.UserLoginPostDto;
 import com.car.asistant.demo.response.UserGetDto;
 import com.car.asistant.demo.service.UserService;
@@ -54,10 +55,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
-                                            HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
+                                            HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException,UserNotEnabledException {
         String userName = ((User) auth.getPrincipal()).getUsername();
         UserService userService = (UserService) SpringApplicationContext.getBean("userServiceImpl");
         UserGetDto userDto = userService.getUser(userName);
+
+        if(!userDto.isEnabled())
+        {
+            throw new UserNotEnabledException(userDto.getEmail());
+        }
+
         String token = JWT.create()
                 .withSubject(userDto.getEmail())
                 .withClaim("role", "ROLE_" + userDto.getRole())

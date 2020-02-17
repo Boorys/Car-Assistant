@@ -3,6 +3,7 @@ package com.car.asistant.demo.controller;
 
 import com.car.asistant.demo.exception.ModelExistException;
 import com.car.asistant.demo.exception.UserExistException;
+import com.car.asistant.demo.exception.UserNotEnabledException;
 import org.springframework.hateoas.mediatype.vnderrors.VndErrors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<VndErrors> modelExistException(ModelExistException e)
     {
         return error(e, HttpStatus.CONFLICT, e.getCarModel());
+    }
+    @ExceptionHandler(UserNotEnabledException.class)
+    public ResponseEntity<VndErrors> accountNotActivatedException(UserNotEnabledException e)
+    {
+        return error(e, HttpStatus.LOCKED, e.getEmail());
     }
 
 

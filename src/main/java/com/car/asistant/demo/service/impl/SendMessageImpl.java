@@ -30,7 +30,7 @@ public class SendMessageImpl implements SendMessageService {
     }
 
     @Override
-    public void sendEmail(CarUserToInformationEntity carUserToInformationEntity) throws MessagingException {
+    public void sendEmailAboutRepair(CarUserToInformationEntity carUserToInformationEntity) throws MessagingException {
 
         String message;
         CarUserToInformationDto carUserToInformationDto;
@@ -42,6 +42,19 @@ public class SendMessageImpl implements SendMessageService {
         mimeMessageHelper.setSubject("Czas na przegląd cześci w twoim samochodzie");
         mimeMessageHelper.setText(message, true);
         javaMailSender.send(mimeMessage);
+
+    }
+
+    @Override
+    public void sendEmail(String message,String email) throws MessagingException {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+        mimeMessageHelper.setTo(email);
+        mimeMessageHelper.setSubject("Weryfikacja");
+        mimeMessageHelper.setText(message, true);
+        javaMailSender.send(mimeMessage);
+
 
     }
 
