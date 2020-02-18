@@ -6,6 +6,7 @@ import com.car.asistant.demo.service.InformationUserService;
 import com.car.asistant.demo.service.SendMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -29,9 +30,7 @@ public class InformationUserImpl implements InformationUserService {
 
 
 
-    //@Scheduled(cron = "1 1 1 1 * ?")//seconds, minutes, hours, days of the month, months and days of the week
-
-   // @Scheduled(fixedRate=1000)
+    @Scheduled(cron="0 0 1 2 * *")//seconds, minutes, hours, days of the month, months and days of the week
    @Override
     public void sendInformationToUser() throws MessagingException {
 

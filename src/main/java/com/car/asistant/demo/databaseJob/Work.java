@@ -17,7 +17,7 @@ public class Work {
         this.sqlJob = sqlJob;
     }
 
- //   @Scheduled(fixedRate = 10000)
+    @Scheduled(cron="0 0 1 1 * *")
     public void work() {
         sqlJob.job();
         System.out.println("sql");

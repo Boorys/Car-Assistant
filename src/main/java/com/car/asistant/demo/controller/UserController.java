@@ -61,6 +61,8 @@ public class UserController {
     }
 
 
+
+
     @GetMapping(path="/verification/email/{token}")
     public ResponseEntity verificationEmail(@PathVariable String token) throws Exception {
 
@@ -69,5 +71,7 @@ public class UserController {
         headers.add("Location", "path");
         return new ResponseEntity(headers, HttpStatus.FOUND);
     }
+
+
 
 }
