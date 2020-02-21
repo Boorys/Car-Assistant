@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -35,15 +34,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
     .authorizeRequests()
+
+                .antMatchers(HttpMethod.POST, "/users/register").permitAll()
                .antMatchers(HttpMethod.POST, "/users/login").permitAll()
+              //  .antMatchers(HttpMethod.DELETE, "/delete/car/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.POST, "/users").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.POST, "/users/addCar/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.GET, "/getUser/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.POST, "/car/model/add/car/model").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/car/model").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.GET, "/car/model/get/model/**").hasAnyRole("ADMIN","USER")
-
-
                 .anyRequest()
                 .permitAll()
                 .and()

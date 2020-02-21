@@ -11,10 +11,13 @@ import com.car.asistant.demo.repository.CarModelRepository;
 import com.car.asistant.demo.repository.CarUserRepository;
 import com.car.asistant.demo.repository.UserRepository;
 import com.car.asistant.demo.request.CarUserPostDto;
+import com.car.asistant.demo.request.CarUserPutDto;
+import com.car.asistant.demo.response.CarUserGetDto;
 import com.car.asistant.demo.service.CarUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class CarUserServiceImpl implements CarUserService {
 
     }
 
+
     @Override
     public UserEntity createCarUser(CarUserPostDto carUserPostDto, String userId) {
 
@@ -67,6 +71,36 @@ public class CarUserServiceImpl implements CarUserService {
         return userEntity;
     }
 
+    @Transactional
+    @Override
+    public void deleteCarUser(String carUserId) {
+
+        carUserRepository.deleteByCarUserId(carUserId);
+    }
+
+    @Override
+    public void updateCarUser(String carUserId, CarUserPutDto carUserPutDto) {
+
+        CarUserEntity carUserEntity = carUserRepository.findByCarUserId(carUserId);
+        carUserEntity.setCarMilages(carUserPutDto.getCarMilages());
+        carUserEntity.setNumberOfKilomentersPerMonth(carUserPutDto.getNumberOfKilomentersPerMonth());
+        carUserEntity.setKilometersSinceTheLastChangeBraekPads(carUserPutDto.getKilometersSinceTheLastChangeBraekPads());
+        carUserEntity.setKilometersSinceTheLastChangeOil(carUserPutDto.getKilometersSinceTheLastChangeOil());
+        carUserEntity.setKilometersSinceTheLastChangeTimingGear(carUserPutDto.getKilometersSinceTheLastChangeTimingGear());
+
+        carUserRepository.save(carUserEntity);
+
+    }
+
+    @Override
+    public CarUserGetDto getCarUser(String carUserId) {
+
+        CarUserEntity carUserEntity = carUserRepository.findByCarUserId(carUserId);
+        CarUserGetDto carUserGetDto = carUserMapper.carUserEntityDtoToCarUserDto(carUserEntity);
+
+
+        return carUserGetDto;
+    }
 
 
 }
