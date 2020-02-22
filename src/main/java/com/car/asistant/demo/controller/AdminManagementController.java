@@ -2,11 +2,14 @@ package com.car.asistant.demo.controller;
 
 
 import com.car.asistant.demo.request.ArticlePostDto;
+import com.car.asistant.demo.response.ArticleGetDto;
 import com.car.asistant.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/page")
@@ -28,6 +31,11 @@ public class AdminManagementController {
 
     }
 
+    @GetMapping(path = "/get/articles", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<ArticleGetDto> getAerticles() {
+
+        return articleService.getArticles();
+    }
 
 
 }

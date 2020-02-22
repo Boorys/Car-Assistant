@@ -1,32 +1,15 @@
-package com.car.asistant.demo.entity;
+package com.car.asistant.demo.response;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-public class ArticleEntity {
+public class ArticleGetDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+
     private String articleId;
-    @Column
     private String title;
-    @Column
     private String text;
-    @Column
     private String author;
-    @Column
     private Date date;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;
