@@ -9,9 +9,6 @@ import com.car.asistant.demo.response.ArticleGetDto;
 import com.car.asistant.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,13 +51,9 @@ public class ArticleServiceImpl implements ArticleService {
 
         articleGetDtoList = articleEntityList.stream()
                 .map(x -> articleMapper.articleEntityToArticleGetDto(x))
-              .sorted((o2,o1)->o1.getDate().compareTo(o2.getDate()))
+                .sorted((o2,o1)->o1.getDate().compareTo(o2.getDate()))
                 .collect(Collectors.toList());
 
-
-
-
         return articleGetDtoList;
-
     }
 }
