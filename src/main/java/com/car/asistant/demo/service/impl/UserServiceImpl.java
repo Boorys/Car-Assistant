@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserEntity createUser(UserPostDto userPostDto) throws MessagingException, ParseException {
+    public UserEntity createUser(UserPostDto userPostDto) throws MessagingException {
 
 
         UserEntity userEntity;
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setUserId(publicUserId);
         userEntity.setRole("USER");
         userEntity.setEnabled(false);
-//send email
+        //send email
         VerificationToken verificationToken = new VerificationToken();
         VerivicationMessage verivicationMessage = new VerivicationMessage();
         String message = verivicationMessage.createMessage(verificationToken.calculateExpiryDate(1, publicUserId).toString());
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void verificationUser(String token) throws Exception {
+    public void verificationUser(String token) throws Exception ,UsernameNotFoundException{
 
         String stringDate = token.substring(0, 9);
         String userId = token.substring(10, 20);

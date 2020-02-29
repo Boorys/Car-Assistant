@@ -1,6 +1,6 @@
 package com.car.asistant.demo.controller;
 
-
+/*
 import com.car.asistant.demo.mapper.CarUserMapper;
 //import com.car.asistant.demo.request.UserDetailsRequsetModel;
 import com.car.asistant.demo.service.CarUserService;
@@ -49,7 +49,7 @@ public void createUserTest()
 
    // userController.createUser(userDetailsRequsetModel);
    // Assert.assertEquals(userController.createUser(userDetailsRequsetModel).getFirstName(),userDto.getFirstName());
-
+/*
 }
 
 
@@ -58,3 +58,4 @@ public void createUserTest()
 
 
 }
+*/

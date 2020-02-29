@@ -1,6 +1,6 @@
 package com.car.asistant.demo.service;
 
-
+/*
 import com.car.asistant.demo.entity.CarModelEntity;
 import com.car.asistant.demo.entity.CarUserEntity;
 import com.car.asistant.demo.kit.Utils;
@@ -24,7 +24,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class CarModelServiceTest {
 
@@ -82,5 +82,6 @@ public class CarModelServiceTest {
     }
 
 
-
-}
+*/
+/*}
+*/
