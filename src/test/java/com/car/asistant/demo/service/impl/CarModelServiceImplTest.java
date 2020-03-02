@@ -55,7 +55,7 @@ public class CarModelServiceImplTest {
     private CarUserRepository carUserRepository;
     @Spy
     @InjectMocks
-    private CarModelServiceImpl carModelService= new CarModelServiceImpl(carModelRepository,carModelMapper,utils,carUserRepository);
+    private CarModelServiceImpl carModelService;
 
 
     @Test

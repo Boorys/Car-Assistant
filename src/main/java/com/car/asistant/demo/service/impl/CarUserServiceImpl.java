@@ -79,7 +79,8 @@ public class CarUserServiceImpl implements CarUserService {
     }
 
     @Override
-    public void updateCarUser(String carUserId, CarUserPutDto carUserPutDto) {
+    public CarUserEntity updateCarUser(String carUserId, CarUserPutDto carUserPutDto) {
+
 
         CarUserEntity carUserEntity = carUserRepository.findByCarUserId(carUserId);
         carUserEntity.setCarMilages(carUserPutDto.getCarMilages());
@@ -90,6 +91,7 @@ public class CarUserServiceImpl implements CarUserService {
 
         carUserRepository.save(carUserEntity);
 
+        return carUserEntity;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.car.asistant.demo.service;
 
 
+import com.car.asistant.demo.entity.CarUserEntity;
 import com.car.asistant.demo.entity.UserEntity;
 import com.car.asistant.demo.request.CarUserPostDto;
 import com.car.asistant.demo.request.CarUserPutDto;
@@ -15,7 +16,7 @@ public interface CarUserService {
 
     void deleteCarUser(String carUserId);
 
-    void updateCarUser(String carUserId, CarUserPutDto carUserPutDto);
+    CarUserEntity updateCarUser(String carUserId, CarUserPutDto carUserPutDto);
 
     CarUserGetDto getCarUser(String carUserId);
 }
