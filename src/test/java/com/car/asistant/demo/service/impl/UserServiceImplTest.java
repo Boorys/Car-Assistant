@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,7 @@ import static org.mockito.BDDMockito.given;
 public class UserServiceImplTest {
 
     @InjectMocks
+    @Spy
     private UserServiceImpl userServiceImpl;
     @Mock
     private UserRepository userRepository;
@@ -78,9 +80,7 @@ public class UserServiceImplTest {
         userPostDto.setPassword("123");
         given(userMapper.userPostDtoToUserEntity(userPostDto)).willReturn(userEntity);
         userEntity.setFirstName("Tom");
-        given(bCryptPasswordEncoder.encode("123")).willReturn("123");
-        given(utils.generateUserId(anyInt())).willReturn("dsfsdfsdf");
-        given(userRepository.save(userEntity)).willReturn(userEntity);
+
 
         //when
 
