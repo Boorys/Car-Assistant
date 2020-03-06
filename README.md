@@ -29,7 +29,12 @@ complete the application.properties file
 
 mvn spring-boot:run
 
+hosting: https://calm-coast-64010.herokuapp.com/ 
 
+acces to admin:
+password: 123456
+
+email: ata46698@eoopy.com
 ## Features
 * sent email about required repair
 * cars reliability ranking
