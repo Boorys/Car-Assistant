@@ -43,8 +43,8 @@ email: ata46698@eoopy.com
 * cars reliability ranking
 
  To-do list:
-* Create frontend
-* Create
+* Create list of car workshops
+
 
 
 ## Status
