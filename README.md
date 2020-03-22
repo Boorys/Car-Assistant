@@ -37,7 +37,7 @@ acces to admin:
 
 password: 123456
 
-email: ata46698@eoopy.com
+email: ekc28308@eoopy.com
 ## Features
 * sent email about required repair
 * cars reliability ranking
